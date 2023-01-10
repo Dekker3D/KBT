@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<Forms>
+    <Form Class="Window" LAnchorPoint=".5" LAnchorOffset="-150" TAnchorPoint=".5" TAnchorOffset="-25" RAnchorPoint=".5" RAnchorOffset="150" BAnchorPoint=".5" BAnchorOffset="60" RelativeToClient="1" Font="Default" Text="" BGColor="UI_WindowBGDefault" TextColor="UI_WindowTextDefault" Template="Default" TooltipType="OnCursor" Name="ProgressForm" Border="1" Picture="1" SwallowMouseClicks="1" Moveable="1" Escapable="0" Overlapped="1" TooltipColor="" Tooltip="">
+        <Control Class="ProgressBar" Text="" LAnchorPoint="0" LAnchorOffset="0" TAnchorPoint="0" TAnchorOffset="0" RAnchorPoint="1" RAnchorOffset="-0" BAnchorPoint="1" BAnchorOffset="-0" AutoSetText="0" UseValues="1" RelativeToClient="1" SetTextToProgress="1" DT_CENTER="1" DT_VCENTER="1" ProgressEmpty="ManaEmpty" ProgressFull="ManaFull" TooltipType="OnCursor" Name="ProgressBar" BGColor="ffffffff" TextColor="ffffffff" TooltipColor="" BarColor=""/>
+        <Control Class="Button" Base="BK3:btnHolo_StoryPanelAlert_Icon" Font="DefaultButton" ButtonType="PushButton" RadioGroup="" LAnchorPoint=".5" LAnchorOffset="-60" TAnchorPoint="0" TAnchorOffset="45" RAnchorPoint=".5" RAnchorOffset="-20" BAnchorPoint="0" BAnchorOffset="85" DT_VCENTER="1" DT_CENTER="1" BGColor="UI_BtnBGDefault" TextColor="UI_BtnTextDefault" NormalTextColor="UI_BtnTextDefault" PressedTextColor="UI_BtnTextDefault" FlybyTextColor="UI_BtnTextDefault" PressedFlybyTextColor="UI_BtnTextDefault" DisabledTextColor="UI_BtnTextDefault" TooltipType="OnCursor" Name="Cancel" TooltipColor="" Border="1" FocusedTextColor="ffffffff">
+            <Event Name="ButtonSignal" Function="OnCancelOperation"/>
+        </Control>
+        <Control Class="Button" Base="" Font="DefaultButton" ButtonType="PushButton" RadioGroup="" LAnchorPoint=".5" LAnchorOffset="-0" TAnchorPoint="0" TAnchorOffset="45" RAnchorPoint=".5" RAnchorOffset="80" BAnchorPoint="0" BAnchorOffset="85" DT_VCENTER="1" DT_CENTER="1" BGColor="UI_BtnBGDefault" TextColor="UI_BtnTextDefault" NormalTextColor="UI_BtnTextDefault" PressedTextColor="UI_BtnTextDefault" FlybyTextColor="UI_BtnTextDefault" PressedFlybyTextColor="UI_BtnTextDefault" DisabledTextColor="UI_BtnTextDefault" TooltipType="OnCursor" Name="Skip" TooltipColor="" FocusedTextColor="ffffffff" Template="CRB_HologramFramedThick" Text="" TextId="Launcher_Skip">
+            <Event Name="ButtonSignal" Function="OnTodo"/>
+        </Control>
+    </Form>
+</Forms>

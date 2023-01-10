@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Addon Author="Katia" APIVersion="16" Name="KatiaBuilderToolkit" Description="Katia&apos;s tools for housing! ♥">
+    <Script Name="KatiaBatcher.lua"/>
+    <Script Name="KatiaBuildUtils.lua"/>
+    <Script Name="KatiaSetManager.lua"/>
+    <Script Name="KatiaDecorEditor.lua"/>
+    <Script Name="KatiaDecorFinder.lua"/>
+    <Script Name="KatiaPlotFinder.lua"/>
+    <Script Name="KatiaBuilderToolkit.lua"/>
+    <Form Name="KatiaBatcher.xml"/>
+    <Form Name="KatiaBuildUtils.xml"/>
+    <Form Name="KatiaSetManager.xml"/>
+    <Form Name="KatiaDecorEditor.xml"/>
+    <Form Name="KatiaDecorFinder.xml"/>
+    <Form Name="KatiaPlotFinder.xml"/>
+    <Form Name="KatiaBuilderToolkit.xml"/>
+</Addon>
