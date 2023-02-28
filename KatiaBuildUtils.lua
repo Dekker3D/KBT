@@ -129,7 +129,7 @@ function KatiaBuildUtils:ClonePack(pack, neutralize)
 	if tDecorCrateList ~= nil then
 		for idx = 1, #tDecorCrateList do
 			local tCratedDecorData = tDecorCrateList[idx]
-			if pack.N ~= nil and tCratedDecorData.strName == pack.N then
+			if pack.I ~= nil and tCratedDecorData.nId == pack.I then -- or pack.N ~= nil and tCratedDecorData.strName == pack.N then
 				for _, specific in pairs(tCratedDecorData.tDecorItems) do
 					if colorMatch == nil or specific.idColorShift == colorMatch then
 						local dec = HousingLib.PreviewCrateDecorAtLocation(
@@ -165,7 +165,7 @@ function KatiaBuildUtils:ClonePack(pack, neutralize)
 		if tDecorVendorList ~= nil then
 			for idx = 1, #tDecorVendorList do
 				local tVendorDecorData = tDecorVendorList[idx]
-				if pack.N ~= nil then -- vendor check was here
+				if pack.I ~= nil then -- vendor check was here
 					local dec = HousingLib.PreviewVendorDecorAtLocation(pack.I,
 								pack.X, pack.Y, pack.Z,
 								pack.P, pack.R, pack.Yaw,
@@ -195,6 +195,19 @@ function KatiaBuildUtils:ClonePack(pack, neutralize)
 
 	return nil
 end
+
+function dump(o)
+	if type(o) == 'table' then
+	   local s = '{ '
+	   for k,v in pairs(o) do
+		  if type(k) ~= 'number' then k = '"'..k..'"' end
+		  s = s .. '['..k..'] = ' .. dump(v) .. ','
+	   end
+	   return s .. '} '
+	else
+	   return tostring(o)
+	end
+ end
 
 -- Conversion between player coordinates and decor coordinates
 local world_offsets = {
