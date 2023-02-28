@@ -763,6 +763,8 @@ function KatiaSetManager:PlaceAll(bLink)
 		table.insert(todo, ch)
 	end
 	Batcher:StartDecorDriven()
+
+	-- Utils:printShoppingList(self.setdirectory[self.selectedset.folder][self.selectedset.set], true)
 end
 
 function KatiaSetManager:FinalSelect()

@@ -196,12 +196,70 @@ function KatiaBuildUtils:ClonePack(pack, neutralize)
 	return nil
 end
 
-function dump(o)
+function KatiaBuildUtils:findDecorInCrate(id, color)
+	local tDecorCrateList = HousingLib.GetResidence():GetDecorCrateList()
+	for _, v in ipairs(tDecorCrateList) do
+		if(id ~= nil and v.nId == id) then
+			if colorMatch == nil or v.idColorShift == colorMatch then
+				Print(self:dumpTable(v))
+				return v.nDecorId, v.nDecorIdHi
+			end
+		end
+	end
+	return nil, nil
+end
+
+function KatiaBuildUtils:makeShoppingList(set, colorMatch)
+	local list = {}
+	for _, v in ipairs(set) do
+		color = 0
+		if(colorMatch and v.C ~= nil) then
+			color = v.C
+		end
+		if(list[v.I] == nil) then
+			list[v.I] = {}
+		end
+		local li = list[v.I]
+		if(li[color] == nil) then
+			li[color] = 0
+		end
+		li[color] = li[color] + 1
+	end
+
+	local tDecorCrateList = HousingLib.GetResidence():GetDecorCrateList()
+	
+	for _, v in ipairs(tDecorCrateList) do
+		local ld = list[v.nId]
+		if (ld ~= nil) then
+			for _, v in ipairs(v.tDecorItems) do
+				if(ld[v.idColorShift] ~= nil) then
+					ld[v.idColorShift] = ld[v.idColorShift] - 1
+					if(ld[v.idColorShift] <= 0) then
+						ld[v.idColorShift] = nil
+					end
+				end
+			end
+		end
+		if(#ld <= 0) then
+			list[v.nId] = nil
+			Print("Emptied a crate decor entry!")
+		end
+	end
+
+	return list
+end
+
+function KatiaBuildUtils:printShoppingList(set, colorMatch)
+	local list = self:makeShoppingList(set, colorMatch)
+	Print(self:dumpTable(list))
+end
+
+function KatiaBuildUtils:dumpTable(o)
 	if type(o) == 'table' then
 	   local s = '{ '
-	   for k,v in pairs(o) do
+	   for k, v in pairs(o) do
 		  if type(k) ~= 'number' then k = '"'..k..'"' end
-		  s = s .. '['..k..'] = ' .. dump(v) .. ','
+		  s = s .. '['..k..'] = ' .. self:dumpTable(v) .. ','
 	   end
 	   return s .. '} '
 	else
