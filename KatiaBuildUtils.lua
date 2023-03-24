@@ -209,21 +209,23 @@ function KatiaBuildUtils:findDecorInCrate(id, color)
 	return nil, nil
 end
 
-function KatiaBuildUtils:makeShoppingList(set, colorMatch)
+function KatiaBuildUtils:makeShoppingList(set, colorMatch, ignoreDefaultColor)
 	local list = {}
 	for _, v in ipairs(set) do
 		color = 0
 		if(colorMatch and v.C ~= nil) then
 			color = v.C
 		end
-		if(list[v.I] == nil) then
-			list[v.I] = {}
+		if(not(color == 0 and ignoreDefaultColor)) then
+			if(list[v.I] == nil) then
+				list[v.I] = {}
+			end
+			local li = list[v.I]
+			if(li[color] == nil) then
+				li[color] = 0
+			end
+			li[color] = li[color] + 1
 		end
-		local li = list[v.I]
-		if(li[color] == nil) then
-			li[color] = 0
-		end
-		li[color] = li[color] + 1
 	end
 
 	local tDecorCrateList = HousingLib.GetResidence():GetDecorCrateList()

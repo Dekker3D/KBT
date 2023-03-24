@@ -764,7 +764,7 @@ function KatiaSetManager:PlaceAll(bLink)
 	end
 	Batcher:StartDecorDriven()
 
-	-- Utils:printShoppingList(self.setdirectory[self.selectedset.folder][self.selectedset.set], true)
+	-- Utils:printShoppingList(self.setdirectory[self.selectedset.folder][self.selectedset.set], true, true)
 end
 
 function KatiaSetManager:FinalSelect()
