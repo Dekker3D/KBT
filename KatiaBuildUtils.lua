@@ -98,7 +98,6 @@ function KatiaBuildUtils:ClonePack(pack, neutralize)
 	else
 		colorMatch = pack.C
 	end
-	colorMatch = nil
 	-- resolve matchers if necessary
 	if pack.matchers ~= nil then
 		local tDecorCrateList = HousingLib.GetResidence():GetDecorCrateList()
@@ -241,10 +240,6 @@ function KatiaBuildUtils:makeShoppingList(set, colorMatch, ignoreDefaultColor)
 					end
 				end
 			end
-		end
-		if(#ld <= 0) then
-			list[v.nId] = nil
-			Print("Emptied a crate decor entry!")
 		end
 	end
 

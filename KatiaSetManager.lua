@@ -718,7 +718,6 @@ function KatiaSetManager:BuySet(set)
 
 	todo = Batcher:Prepare(
 		function (_, entry)
-			Print(string.format("Entry: %d, %d, %d", entry.id, entry.col, entry.amount))
 			local sendCommand = string.format("!house decoradd %d %d %d", entry.id, entry.amount, entry.col)
 			ChatSystemLib.Command(sendCommand)
 		end,
@@ -727,8 +726,6 @@ function KatiaSetManager:BuySet(set)
 	)
 
 	for i, ch in ipairs(list) do
-		Print(type(ch))
-		Print(string.format("Inserting entry: %d %d %d", ch.id, ch.col, ch.amount))
 		table.insert(todo, ch)
 	end
 
@@ -939,6 +936,13 @@ end
 function KatiaSetManager:OnShare()
 	self.wndShare:Invoke()
 	self:OnToDSM()
+end
+
+function KatiaSetManager:OnGetCol( wndHandler, wndControl, eMouseButton )
+	if self.selectedset == nil or self.selectedset.set == nil or self.setdirectory[self.selectedset.folder][self.selectedset.set] == nil then
+		return
+	end
+	self:BuySet(self.setdirectory[self.selectedset.folder][self.selectedset.set])
 end
 
 function KatiaSetManager:OnCancelShare()
