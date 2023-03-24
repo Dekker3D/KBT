@@ -251,8 +251,22 @@ function KatiaBuildUtils:makeShoppingList(set, colorMatch, ignoreDefaultColor)
 	return list
 end
 
-function KatiaBuildUtils:printShoppingList(set, colorMatch)
-	local list = self:makeShoppingList(set, colorMatch)
+function KatiaBuildUtils:flattenShoppingList(list)
+	flat = {}
+	for id, clist in pairs(list) do
+		for col, amount in pairs(clist) do
+			entry = {}
+			entry.id = id
+			entry.col = col
+			entry.amount = amount
+			table.insert(flat, entry)
+		end
+	end
+	return flat
+end
+
+function KatiaBuildUtils:printShoppingList(set, colorMatch, ignoreDefaultColor)
+	local list = self:makeShoppingList(set, colorMatch, ignoreDefaultColor)
 	Print(self:dumpTable(list))
 end
 

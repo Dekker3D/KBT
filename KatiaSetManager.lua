@@ -708,6 +708,33 @@ function KatiaSetManager:OnTodoTimer()
 	Batcher:OnTodo()
 end
 
+function KatiaSetManager:BuySet(set)
+	if self.selectedset == nil or self.selectedset.set == nil or self.setdirectory[self.selectedset.folder][self.selectedset.set] == nil then
+		return
+	end
+
+	local list = Utils:makeShoppingList(self.setdirectory[self.selectedset.folder][self.selectedset.set], true, true)
+	list = Utils:flattenShoppingList(list)
+
+	todo = Batcher:Prepare(
+		function (_, entry)
+			Print(string.format("Entry: %d, %d, %d", entry.id, entry.col, entry.amount))
+			local sendCommand = string.format("!house decoradd %d %d %d", entry.id, entry.amount, entry.col)
+			ChatSystemLib.Command(sendCommand)
+		end,
+		nil,
+		nil
+	)
+
+	for i, ch in ipairs(list) do
+		Print(type(ch))
+		Print(string.format("Inserting entry: %d %d %d", ch.id, ch.col, ch.amount))
+		table.insert(todo, ch)
+	end
+
+	Batcher:StartTimed(0.5)
+end
+
 function KatiaSetManager:PlaceAll(bLink)
 	if self.selectedset == nil or self.selectedset.set == nil or self.setdirectory[self.selectedset.folder][self.selectedset.set] == nil then
 		return
