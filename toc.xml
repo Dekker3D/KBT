@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0.1" encoding="UTF-8"?>
 <Addon Author="Katia" APIVersion="16" Name="KatiaBuilderToolkit" Description="Katia&apos;s tools for housing! ♥">
     <Script Name="KatiaBatcher.lua"/>
     <Script Name="KatiaBuildUtils.lua"/>
