@@ -861,6 +861,7 @@ function KatiaSetManager:Simplify(tSet)
     for idx = 1, #tSet do
         tSimpleData.decor[idx] = {}
         tSimpleData.decor[idx].n = tStringMap[tSet[idx].N]
+		tSimpleData.decor[idx].i = tSet[idx].I
         tSimpleData.decor[idx].x = tSet[idx].X
         tSimpleData.decor[idx].y = tSet[idx].Y
         tSimpleData.decor[idx].z = tSet[idx].Z
@@ -905,6 +906,7 @@ function KatiaSetManager:OnFromDSM()
     for idx = 1, #tSimpleData.decor do
 		local newDec = {}
 		newDec.N = tNameHeaderData[tSimpleData.decor[idx].n]
+		newDec.I = tSimpleData.decor[idx].i
         newDec.X = tSimpleData.decor[idx].x
         newDec.Y = tSimpleData.decor[idx].y
         newDec.Z = tSimpleData.decor[idx].z
