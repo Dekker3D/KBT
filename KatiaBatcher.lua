@@ -103,7 +103,7 @@ function KatiaBatcher:OnTodoDecor(decor)
 	if self.watchDecor then
 		if decor ~= nil then
 			local low, high = decor:GetId()
-			if low ~= 0 and high ~= 0 then
+			if low ~= 0 or high ~= 0 then
 				if self.seen[low] ~= nil and self.seen[low][high] then
 					return
 				else
