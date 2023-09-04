@@ -128,7 +128,8 @@ function KatiaBuildUtils:ClonePack(pack, neutralize)
 	if tDecorCrateList ~= nil then
 		for idx = 1, #tDecorCrateList do
 			local tCratedDecorData = tDecorCrateList[idx]
-			if pack.I ~= nil and tCratedDecorData.nId == pack.I then -- or pack.N ~= nil and tCratedDecorData.strName == pack.N then
+			if pack.I ~= nil and tCratedDecorData.nId == pack.I or pack.N ~= nil and tCratedDecorData.strName == pack.N then
+				if pack.I == nil then pack.I = tCratedDecorData.nId end
 				for _, specific in pairs(tCratedDecorData.tDecorItems) do
 					if colorMatch == nil or specific.idColorShift == colorMatch then
 						local dec = HousingLib.PreviewCrateDecorAtLocation(
@@ -160,27 +161,33 @@ function KatiaBuildUtils:ClonePack(pack, neutralize)
 	
 	-- Go to vendor otherwise
 	if colorMatch == 0 or colorMatch == nil then
-		local tDecorVendorList = HousingLib.GetDecorCatalogList()
-		if tDecorVendorList ~= nil then
-			for idx = 1, #tDecorVendorList do
-				local tVendorDecorData = tDecorVendorList[idx]
-				if pack.I ~= nil then -- vendor check was here
-					local dec = HousingLib.PreviewVendorDecorAtLocation(pack.I,
-								pack.X, pack.Y, pack.Z,
-								pack.P, pack.R, pack.Yaw,
-								pack.S)
-					local tDecorInfo = dec:GetDecorIconInfo()
-					local newX = tDecorInfo.fWorldPosX
-					local newY = tDecorInfo.fWorldPosY
-					local newZ = tDecorInfo.fWorldPosZ
-					-- Deshift if necessary
-					dec = HousingLib.PreviewVendorDecorAtLocation(pack.I,
-								2*pack.X - newX, 2*pack.Y - newY, 2*pack.Z  - newZ,
-								pack.P, pack.R, pack.Yaw,
-								pack.S)
-					return dec
+		local decorId = pack.I
+		if decorId == nil then
+			local tDecorVendorList = HousingLib.GetDecorCatalogList()
+			if tDecorVendorList ~= nil then
+				for idx = 1, #tDecorVendorList do
+					local tVendorDecorData = tDecorVendorList[idx]
+					if pack.N ~= nil and tVendorDecorData.strName == pack.N then
+						decorId = tVendorDecorData.nId
+					end
 				end
 			end
+		end
+		if decorId ~= nil then
+			local dec = HousingLib.PreviewVendorDecorAtLocation(decorId,
+						pack.X, pack.Y, pack.Z,
+						pack.P, pack.R, pack.Yaw,
+						pack.S)
+			local tDecorInfo = dec:GetDecorIconInfo()
+			local newX = tDecorInfo.fWorldPosX
+			local newY = tDecorInfo.fWorldPosY
+			local newZ = tDecorInfo.fWorldPosZ
+			-- Deshift if necessary
+			dec = HousingLib.PreviewVendorDecorAtLocation(decorId,
+						2*pack.X - newX, 2*pack.Y - newY, 2*pack.Z  - newZ,
+						pack.P, pack.R, pack.Yaw,
+						pack.S)
+			return dec
 		end
 	end
 
