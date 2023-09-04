@@ -169,6 +169,7 @@ function KatiaBuildUtils:ClonePack(pack, neutralize)
 					local tVendorDecorData = tDecorVendorList[idx]
 					if pack.N ~= nil and tVendorDecorData.strName == pack.N then
 						decorId = tVendorDecorData.nId
+						pack.I = decorId
 					end
 				end
 			end
